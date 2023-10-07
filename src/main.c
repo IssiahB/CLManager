@@ -25,6 +25,18 @@ int main(void) {
         return 1;
     }
 
+    BookData power;
+    power.title = "The 48 Laws Of Power";
+    power.author = "Robert Greene";
+    power.publisher = "Penguin Group";
+    power.publicationDate = "1998";
+    power.ISBN = "9780140280197";
+    power.genre = "n/a";
+    power.lang = "enUS";
+    power.numPages = 452;
+
+    addBook(power);
+
     closeConnection();
 
     return 0;

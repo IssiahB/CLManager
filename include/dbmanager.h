@@ -4,6 +4,17 @@
 #define OPERATION_SUCCESS 1
 #define OPERATION_FAIL 0
 
+typedef struct data {
+    char* title;
+    char* author;
+    char* publisher;
+    char* publicationDate;
+    char* ISBN;
+    char* genre;
+    char* lang;
+    int numPages;
+} BookData;
+
 /**
  * Creates a connection to the sqlite database. Also ensures the
  * default tables are created.
@@ -16,6 +27,8 @@ int makeConnection(void);
  * Creates the default tables
 */
 static void createTable(void);
+
+int addBook(BookData data);
 
 /**
  * Closes the connection to the sqlite database.
