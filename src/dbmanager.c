@@ -93,7 +93,7 @@ int addBook(BookData data) {
     // Execute insert
     rc = sqlite3_step(stmt);
     if (rc != SQLITE_DONE) {
-        fprintf(stderr, "SQL Error When Executing Insert: %s\n", sqlite3_errmsg(db));
+        fprintf(stderr, "SQL Error When Executing INSERT: %s\n", sqlite3_errmsg(db));
         return OPERATION_FAIL;
     }
 
@@ -102,6 +102,34 @@ int addBook(BookData data) {
     printf("Data inserted successfully");
     sqlite3_finalize(stmt);
     return OPERATION_SUCCESS;
+}
+
+int removeBookById(int id) {
+    int rc = 0;
+    sqlite3_stmt* stmt;
+    const char* sqlDelete = "DELETE FROM Books WHERE BookID = ?";
+
+    rc = sqlite3_prepare_v2(db, sqlDelete, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL Error When Deleting Data: %s\n", sqlite3_errmsg(db));
+        return OPERATION_FAIL;
+    }
+
+    // Bind id and execute sql
+    sqlite3_bind_int(stmt, 1, id);
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        fprintf(stderr, "SQL Error When Executing DELETE: %s\n", sqlite3_errmsg(db));
+        return OPERATION_FAIL;
+    }
+
+    printf("Data deleted successfully");
+    sqlite3_finalize(stmt);
+    return OPERATION_SUCCESS;
+}
+
+int removeBookByTitle(char* title) {
+    return 0;
 }
 
 int closeConnection(void) {

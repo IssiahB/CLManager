@@ -30,6 +30,10 @@ static void createTable(void);
 
 int addBook(BookData data);
 
+int removeBookById(int id);
+
+int removeBookByTitle(char* title);
+
 /**
  * Closes the connection to the sqlite database.
  * @returns OPERATION_SUCCESS if close was successful else
