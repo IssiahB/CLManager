@@ -37,8 +37,19 @@ int main(void) {
 
     // addBook(power);
 
-    removeBookById(1);
+    // removeBookById(1);
 
+    BookArray bookArray = getBooks();
+    if (bookArray.books == NULL) {
+        printf("Books is NULL\n");
+    }
+
+    printf("Book Count: %d\n", bookArray.count);
+    for (int i = 0; i < bookArray.count; i++) {
+        printf("Title: %s\n", bookArray.books[i]->title);
+    }
+
+    freeBooks(bookArray.books, bookArray.count);
     closeConnection();
 
     return 0;
