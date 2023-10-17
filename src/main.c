@@ -12,10 +12,12 @@
  * 
  * Modification History:
  *      - 2023-10-05: Testing out database operations in the main function
+ *      - 2023-10-16: Testing curl and it's functionallity
  * 
 */
 
 #include <stdio.h>
+#include <curl/curl.h>
 
 #include "dbmanager.h"
 
@@ -25,31 +27,21 @@ int main(void) {
         return 1;
     }
 
-    // BookData power;
-    // power.title = "The 48 Laws Of Power";
-    // power.author = "Robert Greene";
-    // power.publisher = "Penguin Group";
-    // power.publicationDate = "1998";
-    // power.ISBN = "9780140280197";
-    // power.genre = "n/a";
-    // power.lang = "enUS";
-    // power.numPages = 452;
+    CURL *curl;
+    CURLcode res;
 
-    // addBook(power);
-
-    // removeBookById(1);
-
-    BookArray bookArray = getBooks();
-    if (bookArray.books == NULL) {
-        printf("Books is NULL\n");
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_CAINFO, "bin/curl-ca-bundle.crt");
+        curl_easy_setopt(curl, CURLOPT_URL, "https://www.google.com");
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }
+        curl_easy_cleanup(curl);
     }
 
-    printf("Book Count: %d\n", bookArray.count);
-    for (int i = 0; i < bookArray.count; i++) {
-        printf("Title: %s\n", bookArray.books[i]->title);
-    }
-
-    freeBooks(bookArray.books, bookArray.count);
+    
     closeConnection();
 
     return 0;

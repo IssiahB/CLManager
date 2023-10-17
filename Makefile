@@ -2,10 +2,10 @@
 CC = gcc
 
 # Compiler flags, e.g. -I<include> -L<link>
-CFLAGS = -Iinclude
+CFLAGS = -Iinclude -I"C:/MinGW/include"
 
 # Linker flags, e.g. -lm (math library)
-LDFLAGS = -Lbin -lsqlite3
+LDFLAGS = -Lbin -lsqlite3 -L"C:/MinGW/lib/curl" -llibcurl-x64
 
 # Name of the executable
 TARGET = bin/CLManager
