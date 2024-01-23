@@ -1,20 +1,19 @@
 # Compiler to use
-CC = gcc
+CC = g++
 
 # Compiler flags, e.g. -I<include> -L<link>
-CFLAGS = -Iinclude -I"C:/MinGW/include"
+CFLAGS = -Iinclude -Iinclude/curl
 
-# Linker flags, e.g. -lm (math library)
-LDFLAGS = -Lbin -lsqlite3 -L"C:/MinGW/lib/curl" -llibcurl-x64
-
+# Linker flags
+LDFLAGS = -Llib -lsqlite3 -l:libcurl.so.4.8.0
 # Name of the executable
 TARGET = bin/CLManager
 
 # List of all .c files in the project
-SRCS = $(wildcard src/*.c)
+SRCS = $(wildcard src/*.cpp)
 
 # List of all .o files that will be generated from .c files
-OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
+OBJS = $(patsubst src/%.cpp, build/%.o, $(SRCS))
 
 all: $(TARGET)
 
