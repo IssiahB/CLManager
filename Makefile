@@ -1,5 +1,5 @@
 # Compiler to use
-CC = g++
+CC = gcc
 
 # Compiler flags, e.g. -I<include> -L<link>
 CFLAGS = -Iinclude -Iinclude/curl
@@ -10,10 +10,10 @@ LDFLAGS = -Llib -lsqlite3 -l:libcurl.so.4.8.0
 TARGET = bin/CLManager
 
 # List of all .c files in the project
-SRCS = $(wildcard src/*.cpp)
+SRCS = $(wildcard src/*.c)
 
 # List of all .o files that will be generated from .c files
-OBJS = $(patsubst src/%.cpp, build/%.o, $(SRCS))
+OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 
 # Check the operating system
 ifeq ($(OS),Windows_NT)

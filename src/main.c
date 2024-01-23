@@ -21,6 +21,8 @@
 
 #include "dbmanager.h"
 
+void printCommands(void);
+
 int main(void) {
     int oper = makeConnection();
     if (oper == OPERATION_FAIL) {
@@ -32,17 +34,24 @@ int main(void) {
 
     curl = curl_easy_init();
     if (curl) {
-        curl_easy_setopt(curl, CURLOPT_CAINFO, "bin/cacert.pem");
-        curl_easy_setopt(curl, CURLOPT_URL, "https://openlibrary.org/search.json");
-        res = curl_easy_perform(curl);
-        if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        }
+        // curl_easy_setopt(curl, CURLOPT_CAINFO, "bin/cacert.pem");
+        // curl_easy_setopt(curl, CURLOPT_URL, "https://openlibrary.org/search.json");
+        // res = curl_easy_perform(curl);
+        // if (res != CURLE_OK) {
+        //     fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        // }
         curl_easy_cleanup(curl);
     }
 
-    
+    printCommands();
     closeConnection();
 
     return 0;
+}
+
+void printCommands(void) {
+    printf("Commands:\n");
+    printf(" s - Search for new books to add to collection\n");
+    printf(" v - View books currently available in collection\n");
+    printf(" x - Exit the program\n");
 }
