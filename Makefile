@@ -15,6 +15,11 @@ SRCS = $(wildcard src/*.cpp)
 # List of all .o files that will be generated from .c files
 OBJS = $(patsubst src/%.cpp, build/%.o, $(SRCS))
 
+# Check the operating system
+ifeq ($(OS),Windows_NT)
+	TARGET := $(TARGET).exe
+endif
+
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
